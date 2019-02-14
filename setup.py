@@ -3,10 +3,12 @@ Setup module.
 """
 from setuptools import setup
 
+from sphinxemoji import __version__
+
 
 setup(
     name='sphinxemoji',
-    version='0.1.0',
+    version=__version__,
     description='An extension to use emoji codes in your Sphinx documentation',
     long_description="""TODO""",
     url='https://github.com/Peque/sphinxemoji',

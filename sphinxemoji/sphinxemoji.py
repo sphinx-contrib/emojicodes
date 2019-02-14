@@ -7,6 +7,8 @@ from docutils.utils import new_document
 from sphinx.transforms import SphinxTransform
 from sphinx.util.docutils import LoggingReporter
 
+from . import __version__
+
 
 class EmojiSubstitutions(SphinxTransform):
     default_priority = 211
@@ -41,4 +43,4 @@ class EmojiSubstitutions(SphinxTransform):
 
 def setup(app):
     app.add_transform(EmojiSubstitutions)
-    return {'version': '0.1.0', 'parallel_read_safe': True}
+    return {'version': __version__, 'parallel_read_safe': True}
