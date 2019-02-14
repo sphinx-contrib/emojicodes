@@ -1,3 +1,4 @@
+import os
 import json
 from pkg_resources import resource_filename
 
@@ -6,6 +7,7 @@ from docutils.utils import new_document
 
 from sphinx.transforms import SphinxTransform
 from sphinx.util.docutils import LoggingReporter
+from sphinx.util.fileutil import copy_asset
 
 from . import __version__
 
@@ -22,8 +24,8 @@ class EmojiSubstitutions(SphinxTransform):
         settings, source = self.document.settings, self.document['source']
         codes = resource_filename(__name__, 'codes.json')
         replacements = json.load(open(codes))
-        to_handle = (set(replacements.keys())
-            - set(self.document.substitution_defs))
+        to_handle = (set(replacements.keys()) -
+                     set(self.document.substitution_defs))
 
         for ref in self.document.traverse(nodes.substitution_reference):
             refname = ref['refname']
@@ -41,6 +43,22 @@ class EmojiSubstitutions(SphinxTransform):
                 ref.replace_self(substitution)
 
 
+def copy_asset_files(app, exc):
+    asset_files = [
+        resource_filename(__name__, 'twemoji.js'),
+        resource_filename(__name__, 'twemoji.css'),
+    ]
+    if exc is None:  # build succeeded
+        for path in asset_files:
+            copy_asset(path, os.path.join(app.outdir, '_static'))
+
+
 def setup(app):
+    app.connect('build-finished', copy_asset_files)
+    style = app.config._raw_config.get('sphinxemoji_style')
+    if style == 'twemoji':
+        app.add_javascript('//twemoji.maxcdn.com/2/twemoji.min.js?11.3')
+        app.add_javascript('twemoji.js')
+        app.add_stylesheet('twemoji.css')
     app.add_transform(EmojiSubstitutions)
     return {'version': __version__, 'parallel_read_safe': True}

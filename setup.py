@@ -27,7 +27,13 @@ setup(
         'Framework :: Sphinx :: Extension',
     ],
     packages=['sphinxemoji'],
-    package_data={'sphinxemoji': ['codes.json']},
+    package_data={
+        'sphinxemoji': [
+            'codes.json',
+            'twemoji.css',
+            'twemoji.js',
+        ],
+    },
     install_requires=[
         'sphinx',
     ],
