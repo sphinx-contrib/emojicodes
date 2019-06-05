@@ -1,5 +1,5 @@
-sphinxemoji
-===========
+Sphinx Emoji Codes
+==================
 
 An extension to use emoji codes in your Sphinx documentation!
 
@@ -33,6 +33,9 @@ If you want a consistent emoji style, you can set it in your ``conf.py`` file:
 .. code:: python
 
    sphinxemoji_style = 'twemoji'
+
+You can find a list of all supported emoji codes in `the project's documentation page
+<https://sphinxemojicodes.readthedocs.io/>`_.
 
 
 Notes

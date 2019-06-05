@@ -11,7 +11,7 @@ setup(
     version=__version__,
     description='An extension to use emoji codes in your Sphinx documentation',
     long_description="""TODO""",
-    url='https://github.com/Peque/sphinxemoji',
+    url='https://github.com/sphinx-contrib/emojicodes',
     author='Miguel Sánchez de León Peque',
     author_email='peque@neosit.es',
     license='BSD License',
