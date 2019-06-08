@@ -1,15 +1,12 @@
 import json
-import urllib.request
+from urllib.request import urlopen
 
 
 def update_codes():
-    url = ('https://raw.githubusercontent.com/gitlabhq/gitlabhq'
-           '/master/fixtures/emojis/index.json')
-    data = json.load(urllib.request.urlopen(url))
+    remote = 'https://gitlab.com/gitlab-org/gitlab-ce/raw/master'
+    data = json.load(urlopen(remote + '/fixtures/emojis/index.json'))
     codes = {emoji['shortname']: emoji['moji'] for emoji in data.values()}
-    url = ('https://raw.githubusercontent.com/gitlabhq/gitlabhq'
-       '/master/fixtures/emojis/aliases.json')
-    aliases = json.load(urllib.request.urlopen(url))
+    aliases = json.load(urlopen(remote + '/fixtures/emojis/aliases.json'))
     for alias, original in aliases.items():
         codes[':%s:' % alias] = codes[':%s:' % original]
     with open('sphinxemoji/codes.json', 'w') as output:
