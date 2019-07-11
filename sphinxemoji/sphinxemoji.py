@@ -57,7 +57,7 @@ def setup(app):
     app.connect('build-finished', copy_asset_files)
     style = app.config._raw_config.get('sphinxemoji_style')
     if style == 'twemoji':
-        app.add_javascript('//twemoji.maxcdn.com/2/twemoji.min.js?11.3')
+        app.add_javascript('https://twemoji.maxcdn.com/v/latest/twemoji.min.js')
         app.add_javascript('twemoji.js')
         app.add_stylesheet('twemoji.css')
     app.add_transform(EmojiSubstitutions)
