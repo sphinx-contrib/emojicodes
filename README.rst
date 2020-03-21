@@ -34,8 +34,8 @@ If you want a consistent emoji style, you can set it in your ``conf.py`` file:
 
    sphinxemoji_style = 'twemoji'
 
-You can find a list of all supported emoji codes in `the project's documentation page
-<https://sphinxemojicodes.readthedocs.io/>`_.
+You can find the list of all supported emoji codes `here
+<https://sphinxemojicodes.readthedocs.io/#supported-codes>`_.
 
 
 Notes
