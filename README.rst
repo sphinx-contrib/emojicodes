@@ -22,9 +22,9 @@ Enable the Sphinx extension(s) in your ``conf.py`` file:
 
 Then you can use emoji code replacements by writing them between bars:
 
-.. code:: sphinx
+.. code:: rst
 
-   This text includes a smily face |:smile:| and a snake too! |:snake:|
+   This text includes a smiley face |:smile:| and a snake too! |:snake:|
 
    Don't you love it? |:heart_eyes:|
 
