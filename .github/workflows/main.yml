@@ -12,6 +12,10 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install sphinxemoji and all its requirements
-      run: python -m pip install -e .
+      run: python -m pip install -e .[ci]
     - name: Test
-      run: python -c 'from sphinxemoji import sphinxemoji'  # dummy test
+      run: |
+        doc8 README.rst
+        doc8 docs/source/
+        make -C docs html SPHINXOPTS="-W -E"
+        make -C docs linkcheck
