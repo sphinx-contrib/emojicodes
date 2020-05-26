@@ -35,6 +35,6 @@ setup(
         ],
     },
     install_requires=[
-        'sphinx>=1.7',
+        'sphinx>=1.8',
     ],
 )
