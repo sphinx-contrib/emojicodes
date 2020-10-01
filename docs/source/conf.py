@@ -77,6 +77,17 @@ html_theme_options = {
 html_static_path = ['_static']
 
 
+# -- Options for LaTeX output -------------------------------------------------
+
+latex_engine = 'xelatex'
+latex_elements = {
+    'fontpkg': """
+\usepackage{fontspec}
+\setmainfont{Symbola}
+""",
+}
+
+
 class SphinxEmojiTable(Directive):
     """Directive to display all supported emoji codes in a table"""
     has_content = False
