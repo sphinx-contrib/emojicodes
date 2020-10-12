@@ -1,5 +1,6 @@
 import os
 import json
+from io import open
 from pkg_resources import resource_filename
 
 from docutils import nodes
@@ -23,7 +24,7 @@ class EmojiSubstitutions(SphinxTransform):
         config = self.document.settings.env.config
         settings, source = self.document.settings, self.document['source']
         codes = resource_filename(__name__, 'codes.json')
-        replacements = json.load(open(codes))
+        replacements = json.load(open(codes, encoding='utf-8'))
         to_handle = (set(replacements.keys()) -
                      set(self.document.substitution_defs))
 
