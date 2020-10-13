@@ -4,7 +4,6 @@
 # list see the documentation:
 # http://www.sphinx-doc.org/en/master/config
 import json
-import textwrap
 from docutils.parsers.rst import Directive
 from pkgutil import get_data
 
@@ -74,7 +73,7 @@ html_theme_options = {
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = []
 
 
 # -- Options for LaTeX output -------------------------------------------------
@@ -82,8 +81,8 @@ html_static_path = ['_static']
 latex_engine = 'xelatex'
 latex_elements = {
     'fontpkg': """
-\usepackage{fontspec}
-\setmainfont{Symbola}
+\\usepackage{fontspec}
+\\setmainfont{Symbola}
 """,
 }
 
