@@ -1,0 +1,22 @@
+name: main
+on: push
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest]
+        python-version: [3.6, 3.7, 3.8]
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install sphinxemoji and all its requirements
+      run: python -m pip install -e .[ci]
+    - name: Test
+      run: |
+        doc8 README.rst
+        doc8 docs/source/
+        make -C docs html SPHINXOPTS="-W -E"
+        make -C docs linkcheck

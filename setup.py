@@ -37,4 +37,9 @@ setup(
     install_requires=[
         'sphinx>=1.8',
     ],
+    extras_require={
+        'ci': [
+            'doc8',
+        ]
+    },
 )
