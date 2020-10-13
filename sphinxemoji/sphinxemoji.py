@@ -1,6 +1,5 @@
 import os
 import json
-from io import open
 from pkg_resources import resource_filename
 
 from docutils import nodes

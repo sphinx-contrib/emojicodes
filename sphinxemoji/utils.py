@@ -1,5 +1,4 @@
 import json
-from io import open
 from urllib.request import urlopen
 
 
