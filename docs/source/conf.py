@@ -3,9 +3,7 @@
 # This file only contains a selection of the most common options. For a full
 # list see the documentation:
 # http://www.sphinx-doc.org/en/master/config
-import json
 from docutils.parsers.rst import Directive
-from pkgutil import get_data
 
 import sphinxemoji
 
@@ -97,8 +95,7 @@ class SphinxEmojiTable(Directive):
     def run(self):
         doc_source_name = self.state.document.attributes['source']
 
-        codes = get_data('sphinxemoji', 'codes.json')
-        codes = json.loads(codes)
+        codes = sphinxemoji.sphinxemoji.load_emoji_codes()
 
         lines = []
         lines.append('.. csv-table:: Supported emoji codes')

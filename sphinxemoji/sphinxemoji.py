@@ -12,6 +12,31 @@ from sphinx.util.fileutil import copy_asset
 from . import __version__
 
 
+def load_emoji_codes():
+    """
+    Load emoji codes from the JSON file.
+
+    This function tweaks some emojis to avoid Sphinx warnings when generating
+    the documentation. See:
+
+    - Original issue: https://github.com/sphinx-doc/sphinx/issues/8276
+    - New issue: https://sourceforge.net/p/docutils/feature-requests/79/
+    """
+    fname = resource_filename(__name__, 'codes.json')
+    with open(fname, encoding='utf-8') as fp:
+        codes = json.load(fp)
+
+    # Avoid unexpected warnings
+    warning_keys = []
+    for key, value in codes.items():
+        if value.startswith("*"):
+            warning_keys.append(key)
+    for key in warning_keys:
+        codes[key] = "\\" + codes[key]
+
+    return codes
+
+
 class EmojiSubstitutions(SphinxTransform):
     default_priority = 211
 
@@ -22,18 +47,16 @@ class EmojiSubstitutions(SphinxTransform):
     def apply(self):
         config = self.document.settings.env.config
         settings, source = self.document.settings, self.document['source']
-        codes = resource_filename(__name__, 'codes.json')
 
-        with open(codes, encoding='utf-8') as fp:
-            replacements = json.load(fp)
+        codes = load_emoji_codes()
 
-        to_handle = (set(replacements.keys()) -
+        to_handle = (set(codes.keys()) -
                      set(self.document.substitution_defs))
 
         for ref in self.document.traverse(nodes.substitution_reference):
             refname = ref['refname']
             if refname in to_handle:
-                text = replacements[refname]
+                text = codes[refname]
 
                 doc = new_document(source, settings)
                 doc.reporter = LoggingReporter.from_reporter(doc.reporter)
