@@ -15,7 +15,8 @@ Currently there is just one supported style, `Twemoji <https://twemoji.twitter.c
 
 .. literalinclude::  ../../sphinxemoji/sphinxemoji.py
    :language: python
-   :lines: 58-62
+   :start-at: emoji_styles
+   :end-at: }
 
 
 Supported Codes

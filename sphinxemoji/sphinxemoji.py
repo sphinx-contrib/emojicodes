@@ -11,6 +11,14 @@ from sphinx.util.fileutil import copy_asset
 
 from . import __version__
 
+emoji_styles = {
+    'twemoji': [
+        'https://twemoji.maxcdn.com/v/latest/twemoji.min.js',
+        'twemoji.js',
+        'twemoji.css',
+    ],
+}
+
 
 def load_emoji_codes():
     """
@@ -82,9 +90,11 @@ def copy_asset_files(app, exc):
 def setup(app):
     app.connect('build-finished', copy_asset_files)
     style = app.config._raw_config.get('sphinxemoji_style')
-    if style == 'twemoji':
-        app.add_js_file('https://twemoji.maxcdn.com/v/latest/twemoji.min.js')
-        app.add_js_file('twemoji.js')
-        app.add_css_file('twemoji.css')
+    if style in emoji_styles:
+        for fname in emoji_styles[style]:
+            if fname.endswith('.js'):
+                app.add_js_file(fname)
+            elif fname.endswith('.css'):
+                app.add_css_file(fname)
     app.add_transform(EmojiSubstitutions)
     return {'version': __version__, 'parallel_read_safe': True}
