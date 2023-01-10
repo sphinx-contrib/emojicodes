@@ -12,11 +12,13 @@ from sphinx.util.fileutil import copy_asset
 from . import __version__
 
 emoji_styles = {
-    'twemoji': [
-        'https://unpkg.com/twemoji@latest/dist/twemoji.min.js',
-        'twemoji.js',
-        'twemoji.css',
-    ],
+    'twemoji': {
+        'source': 'https://unpkg.com/twemoji@latest/dist/twemoji.min.js',
+        'libs': [
+            'twemoji.js',
+            'twemoji.css',
+        ]
+    },
 }
 
 
@@ -90,8 +92,10 @@ def copy_asset_files(app, exc):
 def setup(app):
     app.connect('build-finished', copy_asset_files)
     style = app.config._raw_config.get('sphinxemoji_style')
+    source = app.config._raw_config.get('sphinxemoji_source', emoji_styles[style]['source'])
     if style in emoji_styles:
-        for fname in emoji_styles[style]:
+        app.add_js_file(source)
+        for fname in emoji_styles[style]['libs']:
             if fname.endswith('.js'):
                 app.add_js_file(fname)
             elif fname.endswith('.css'):

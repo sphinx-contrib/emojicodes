@@ -34,6 +34,14 @@ If you want a consistent emoji style, you can set it in your ``conf.py`` file:
 
    sphinxemoji_style = 'twemoji'
 
+By default twemoji is obtained from a CDN. If you want to specify your own
+source location (be it local or from another CDN), you can do so via the ``conf.py`` file:
+
+.. code:: python
+
+   sphinxemoji_source = 'https://unpkg.com/twemoji@latest/dist/twemoji.min.js'
+   # or: sphinxemoji_source = 'my-local-twemoji.min.js'
+
 You can find the list of all supported emoji codes `in the project's documentation page
 <https://sphinxemojicodes.readthedocs.io/#supported-codes>`_.
 
