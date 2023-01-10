@@ -13,7 +13,7 @@ from . import __version__
 
 emoji_styles = {
     'twemoji': [
-        'https://twemoji.maxcdn.com/v/latest/twemoji.min.js',
+        'https://unpkg.com/twemoji@latest/dist/twemoji.min.js',
         'twemoji.js',
         'twemoji.css',
     ],
