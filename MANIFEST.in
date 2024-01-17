@@ -1,0 +1,3 @@
+include sphinxemoji/*.json
+include sphinxemoji/*.css
+include sphinxemoji/*.js

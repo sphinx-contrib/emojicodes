@@ -1,6 +1,6 @@
 import os
 import json
-from pkg_resources import resource_filename
+from importlib import resources
 
 from docutils import nodes
 from docutils.utils import new_document
@@ -32,7 +32,7 @@ def load_emoji_codes():
     - Original issue: https://github.com/sphinx-doc/sphinx/issues/8276
     - New issue: https://sourceforge.net/p/docutils/feature-requests/79/
     """
-    fname = resource_filename(__name__, 'codes.json')
+    fname = resources.files('sphinxemoji') / 'codes.json'
     with open(fname, encoding='utf-8') as fp:
         codes = json.load(fp)
 
@@ -81,8 +81,8 @@ class EmojiSubstitutions(SphinxTransform):
 
 def copy_asset_files(app, exc):
     asset_files = [
-        resource_filename(__name__, 'twemoji.js'),
-        resource_filename(__name__, 'twemoji.css'),
+        resources.files('sphinxemoji') / 'twemoji.js',
+        resources.files('sphinxemoji') / 'twemoji.css',
     ]
     if exc is None:  # build succeeded
         for path in asset_files:
@@ -92,10 +92,11 @@ def copy_asset_files(app, exc):
 def setup(app):
     app.connect('build-finished', copy_asset_files)
     style = app.config._raw_config.get('sphinxemoji_style')
-    source = app.config._raw_config.get('sphinxemoji_source', emoji_styles[style]['source'])
     if style in emoji_styles:
+        files = emoji_styles[style]
+        source = app.config._raw_config.get('sphinxemoji_source', files['source'])
         app.add_js_file(source)
-        for fname in emoji_styles[style]['libs']:
+        for fname in files['libs']:
             if fname.endswith('.js'):
                 app.add_js_file(fname)
             elif fname.endswith('.css'):

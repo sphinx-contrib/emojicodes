@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sphinxemoji"
+description = "An extension to use emoji codes in your Sphinx documentation"
+dynamic = ["version"]
+authors = [
+    {name = "Miguel Sánchez de León Peque", email = "peque@neosit.es"},
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Topic :: Documentation",
+    "Topic :: Software Development",
+    "Topic :: Utilities",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Framework :: Sphinx :: Extension",
+]
+dependencies = [
+    "sphinx>=4.0",
+]
+requires-python = ">=3.9"
+
+[project.urls]
+Homepage = "https://sphinxemojicodes.readthedocs.io"
+Repository = "https://github.com/sphinx-contrib/emojicodes"
+Documentation = "https://sphinxemojicodes.readthedocs.io"
+Issues = "https://github.com/sphinx-contrib/emojicodes/issues"
+
+[tool.setuptools.dynamic]
+version = {attr = "sphinxemoji.__version__"}

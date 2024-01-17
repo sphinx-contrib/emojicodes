@@ -28,13 +28,21 @@ Then you can use emoji code replacements by writing them between bars:
 
    Don't you love it? |:heart_eyes:|
 
-If you want a consistent emoji style, you can set it in your ``conf.py`` file:
+You can find the list of all supported emoji codes `in the project's documentation page
+<https://sphinxemojicodes.readthedocs.io/#supported-codes>`_.
+
+
+Configuration
+-------------
+
+If you want a consistent emoji style instead of using the browser's default,
+you can set it in your ``conf.py`` file:
 
 .. code:: python
 
    sphinxemoji_style = 'twemoji'
 
-By default twemoji is obtained from a CDN. If you want to specify your own
+By default Twemoji is obtained from a CDN. If you want to specify your own
 source location (be it local or from another CDN), you can do so via the ``conf.py`` file:
 
 .. code:: python
@@ -42,8 +50,15 @@ source location (be it local or from another CDN), you can do so via the ``conf.
    sphinxemoji_source = 'https://unpkg.com/twemoji@latest/dist/twemoji.min.js'
    # or: sphinxemoji_source = 'my-local-twemoji.min.js'
 
-You can find the list of all supported emoji codes `in the project's documentation page
-<https://sphinxemojicodes.readthedocs.io/#supported-codes>`_.
+
+Build
+-----
+
+You can build this package by running this command from the root directory:
+
+.. code::
+
+   python -m build
 
 
 Notes
