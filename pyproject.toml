@@ -21,7 +21,7 @@ classifiers = [
     "Framework :: Sphinx :: Extension",
 ]
 dependencies = [
-    "sphinx>=4.0",
+    "sphinx>=5.0",
 ]
 requires-python = ">=3.9"
 
