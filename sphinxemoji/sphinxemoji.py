@@ -80,13 +80,16 @@ class EmojiSubstitutions(SphinxTransform):
 
 
 def copy_asset_files(app, exc):
+    if exc is not None:  # build failed
+        return
     asset_files = [
         resources.files('sphinxemoji') / 'twemoji.js',
         resources.files('sphinxemoji') / 'twemoji.css',
     ]
-    if exc is None:  # build succeeded
-        for path in asset_files:
-            copy_asset(path, os.path.join(app.outdir, '_static'))
+    for path in asset_files:
+        # Compatibility with Sphinx < 7.2 (Path would raise an exception)
+        path = str(path)
+        copy_asset(path, os.path.join(app.outdir, '_static'))
 
 
 def setup(app):
