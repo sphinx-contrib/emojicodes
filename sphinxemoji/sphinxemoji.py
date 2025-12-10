@@ -3,10 +3,8 @@ import json
 from importlib import resources
 
 from docutils import nodes
-from docutils.utils import new_document
 
 from sphinx.transforms import SphinxTransform
-from sphinx.util.docutils import LoggingReporter
 from sphinx.util.fileutil import copy_asset
 
 from . import __version__
@@ -52,12 +50,8 @@ class EmojiSubstitutions(SphinxTransform):
 
     def __init__(self, document, startnode=None):
         super().__init__(document, startnode)
-        self.parser = self.app.registry.create_source_parser(self.app, 'rst')
 
     def apply(self):
-        config = self.document.settings.env.config
-        settings, source = self.document.settings, self.document['source']
-
         codes = load_emoji_codes()
 
         to_handle = (set(codes.keys()) -
@@ -66,17 +60,7 @@ class EmojiSubstitutions(SphinxTransform):
         for ref in self.document.traverse(nodes.substitution_reference):
             refname = ref['refname']
             if refname in to_handle:
-                text = codes[refname]
-
-                doc = new_document(source, settings)
-                doc.reporter = LoggingReporter.from_reporter(doc.reporter)
-                self.parser.parse(text, doc)
-
-                substitution = doc.next_node()
-                # Remove encapsulating paragraph
-                if isinstance(substitution, nodes.paragraph):
-                    substitution = substitution.next_node()
-                ref.replace_self(substitution)
+                ref.replace_self(nodes.Text(codes[refname]))
 
 
 def copy_asset_files(app, exc):
