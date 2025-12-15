@@ -54,11 +54,25 @@ source location (be it local or from another CDN), you can do so via the ``conf.
 Build
 -----
 
+Install the Python build frontend:
+
+.. code::
+
+   pip install build
+
+
 You can build this package by running this command from the root directory:
 
 .. code::
 
    python -m build
+
+
+And for publishing:
+
+.. code::
+
+   python -m twine upload dist/*
 
 
 Notes
